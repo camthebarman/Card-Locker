@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0b0d12">
+<meta name="description" content="Card Locker — a digital portfolio for your graded football, baseball and Pokémon cards.">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<title>Card Locker</title>
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="appbar">
+  <div class="appbar__title">
+    <span class="logo" aria-hidden="true"></span>
+    <h1>Card&nbsp;Locker</h1>
+  </div>
+  <button type="button" class="btn btn--primary" id="add-open">+ Add</button>
+</header>
+
+<section class="stats" aria-label="Portfolio summary">
+  <div class="stat"><span class="stat__value" id="stat-count">0</span><span class="stat__label">Cards</span></div>
+  <div class="stat"><span class="stat__value" id="stat-value">$0</span><span class="stat__label">Book value</span></div>
+  <div class="stat"><span class="stat__value" id="stat-psa">—</span><span class="stat__label">Avg PSA</span></div>
+</section>
+
+<div class="toolbar">
+  <label class="field field--search">
+    <span class="sr-only">Search cards</span>
+    <input type="search" id="search" placeholder="Search player, team or set" autocomplete="off" enterkeyhint="search">
+  </label>
+  <label class="field field--sort">
+    <span class="sr-only">Sort cards</span>
+    <select id="sort">
+      <option value="added-desc">Newest added</option>
+      <option value="added-asc">Oldest added</option>
+      <option value="price-asc">Price: low to high</option>
+      <option value="price-desc">Price: high to low</option>
+      <option value="name-asc">Name: A to Z</option>
+      <option value="name-desc">Name: Z to A</option>
+    </select>
+  </label>
+</div>
+
+<main>
+  <ul class="grid" id="grid"></ul>
+  <p class="empty" id="empty" hidden>No cards match that search.</p>
+  <p class="hint">Tap a card to flip it.</p>
+</main>
+
+<dialog class="sheet" id="add-dialog" aria-labelledby="add-title">
+  <form method="dialog" id="add-form" class="sheet__form">
+    <div class="sheet__head">
+      <h2 id="add-title">Add a card</h2>
+      <button type="button" class="btn btn--ghost" id="add-close" aria-label="Close">✕</button>
+    </div>
+
+    <label class="upload" id="upload-label">
+      <input type="file" id="f-image" accept="image/*" required>
+      <img alt="" id="upload-preview" hidden>
+      <span class="upload__text" id="upload-text">Tap to choose a card photo</span>
+    </label>
+
+    <div class="row">
+      <label class="field"><span>Card name</span>
+        <input type="text" id="f-name" required maxlength="60" placeholder="Patrick Mahomes"></label>
+    </div>
+    <div class="row row--2">
+      <label class="field"><span>Set</span>
+        <input type="text" id="f-set" maxlength="40" placeholder="Prizmatic"></label>
+      <label class="field"><span>Year</span>
+        <input type="number" id="f-year" min="1900" max="2100" inputmode="numeric" placeholder="2024"></label>
+    </div>
+    <div class="row row--2">
+      <label class="field"><span>Price (USD)</span>
+        <input type="number" id="f-price" min="0" step="0.01" inputmode="decimal" required placeholder="250.00"></label>
+      <label class="field"><span>PSA grade</span>
+        <select id="f-psa">
+          <option value="10">PSA 10</option>
+          <option value="9" selected>PSA 9</option>
+          <option value="8">PSA 8</option>
+          <option value="7">PSA 7</option>
+          <option value="6">PSA 6</option>
+          <option value="">Ungraded</option>
+        </select></label>
+    </div>
+    <div class="row">
+      <label class="field"><span>Buy link</span>
+        <input type="url" id="f-buy" inputmode="url" placeholder="https://www.ebay.com/itm/..."></label>
+    </div>
+
+    <p class="sheet__error" id="add-error" hidden></p>
+
+    <div class="sheet__actions">
+      <button type="button" class="btn btn--ghost" id="add-cancel">Cancel</button>
+      <button type="submit" class="btn btn--primary">Save card</button>
+    </div>
+  </form>
+</dialog>
+
+<script src="cards.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
