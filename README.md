@@ -47,6 +47,25 @@ python3 -m http.server 8000
 
 Then browse to `http://<your-computer-ip>:8000` on the phone.
 
+## Deploying to GitHub Pages
+
+`.github/workflows/pages.yml` publishes the repo root as-is (no build step) on every push
+to `main` or `claude/tradable-cards-portfolio-serol0`, and can be run by hand from the
+Actions tab.
+
+It needs Pages switched on once, by hand — a workflow's `GITHUB_TOKEN` is not allowed to
+create the Pages site itself:
+
+**Settings → Pages → Build and deployment → Source: _GitHub Actions_**
+
+Then re-run the **Deploy to GitHub Pages** workflow. The site lands at
+`https://camthebarman.github.io/Card-Locker/`. Every path in the app is relative, so it
+works from that subdirectory without changes.
+
+(If you would rather serve straight off a branch — Source: _Deploy from a branch_, branch
+`claude/tradable-cards-portfolio-serol0`, folder `/ (root)` — that works too, but then
+delete the workflow: `deploy-pages` fails when the Pages source is not GitHub Actions.)
+
 ## Notes
 
 Added cards live in `localStorage` under `cardlocker:cards:v1` on that one browser —
