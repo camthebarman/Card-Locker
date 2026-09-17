@@ -49,22 +49,14 @@ Then browse to `http://<your-computer-ip>:8000` on the phone.
 
 ## Deploying to GitHub Pages
 
-`.github/workflows/pages.yml` publishes the repo root as-is (no build step) on every push
-to `main` or `claude/tradable-cards-portfolio-serol0`, and can be run by hand from the
-Actions tab.
+The site is live at **https://camthebarman.github.io/Card-Locker/**
 
-It needs Pages switched on once, by hand — a workflow's `GITHUB_TOKEN` is not allowed to
-create the Pages site itself:
+Pages serves it straight off `main` (Settings → Pages → Source: *Deploy from a branch*,
+branch `main`, folder `/ (root)`). There is no build step and no deploy workflow: the repo
+root *is* the site, so merging to `main` publishes it. Every path in the app is relative,
+so it works from the `/Card-Locker/` subdirectory without changes.
 
-**Settings → Pages → Build and deployment → Source: _GitHub Actions_**
-
-Then re-run the **Deploy to GitHub Pages** workflow. The site lands at
-`https://camthebarman.github.io/Card-Locker/`. Every path in the app is relative, so it
-works from that subdirectory without changes.
-
-(If you would rather serve straight off a branch — Source: _Deploy from a branch_, branch
-`claude/tradable-cards-portfolio-serol0`, folder `/ (root)` — that works too, but then
-delete the workflow: `deploy-pages` fails when the Pages source is not GitHub Actions.)
+`.nojekyll` keeps Pages from running the files through Jekyll.
 
 ## Notes
 
